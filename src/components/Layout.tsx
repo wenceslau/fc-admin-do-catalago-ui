@@ -8,7 +8,7 @@ export function Layout({children}: { children: React.ReactNode }) {
                 {
                     mt: 4,
                     mb: 4,
-                    backgroundColor: "#000"
+                    color: "white"
                 }}>
                 {children}
             </Container>
