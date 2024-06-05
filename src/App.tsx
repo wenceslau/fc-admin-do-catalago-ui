@@ -5,20 +5,9 @@ import Header from "./components/Header";
 import {Layout} from "./components/Layout";
 import {appTheme} from "./config/tehme";
 import {Routes, Route, Link} from 'react-router-dom';
-
-const Home = () => (
-        <div>
-            <Typography variant="h1">Home</Typography>
-            <Link to="/about">About</Link>
-        </div>
-);
-
-const About = () => (
-    <div>
-        <Typography variant="h1">About</Typography>
-        <Link to="/">Home</Link>
-    </div>
-);
+import {CategoryList} from "./features/categories/CategoryList";
+import {CategoryEdit} from "./features/categories/CategoryEdit";
+import {CategoryCreate} from "./features/categories/CategoryCreate";
 
 function App() {
     return (
@@ -34,8 +23,11 @@ function App() {
                 <Layout>
                     <h1>Home</h1>
                     <Routes>
-                        <Route path="/" element={<Home/>}/>
-                        <Route path="/about" element={<About/>}/>
+                        <Route path="/" element={<CategoryList/>} />
+                        <Route path={"/categories"} element={<CategoryList/>} />
+                        <Route path={"/categories/create"} element={<CategoryCreate/>} />
+                        <Route path={"/categories/edit/:id"} element={<CategoryEdit/>} />
+                        <Route path="*" element={<Typography variant="h3" component="h1">Page Not Found</Typography>} />
                     </Routes>
 
                 </Layout>
