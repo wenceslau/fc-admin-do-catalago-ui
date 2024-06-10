@@ -1,0 +1,10 @@
+⇒  npx create-next-app@latest
+
+⇒  npx create-next-app
+    command to create app next.js
+
+⇒  npx create-react-app {name} --template redux-typescript
+    command to create react app using redux with typscript
+
+⇒ npm install @mui/x-data-grid
+    command to install material ui data grid
