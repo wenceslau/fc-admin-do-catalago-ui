@@ -1,8 +1,9 @@
-import {Box, Button, Typography} from "@mui/material";
+import {Box, Button, IconButton, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
 import {useAppSelector} from "../../app/hooks";
 import {selectCategories} from "./categorySlice";
-import {DataGrid, GridRowsProp, GridColDef} from "@mui/x-data-grid";
+import DeleteIcon from '@mui/icons-material/Delete';
+import {DataGrid, GridRowsProp, GridColDef, GridRenderCellParams, renderActionsCell} from "@mui/x-data-grid";
 
 export const CategoryList = () => {
 
@@ -14,8 +15,8 @@ export const CategoryList = () => {
         id: category.id,
         name: category.name,
         description: category.description,
-        is_active: category.is_active,
-        created_at: category.created_at
+        isActive: category.is_active,
+        createdAt: new Date(category.created_at).toLocaleDateString("pt-BR")
     }));
 
     const columns: GridColDef[] = [
@@ -23,12 +24,37 @@ export const CategoryList = () => {
         {field: 'name', headerName: 'Name', flex: 1},
         {field: 'description', headerName: 'Description', flex: 1},
         {
-            field: 'is_active', headerName: 'Active', flex: 1, type: 'boolean',
-            renderCell: (row) => {
-                return row.value ? 'Active' : 'Inactive'
-            }
+            field: 'isActive', headerName: 'Active', flex: 1, type: 'boolean',
+            renderCell: renderIsActiveCell,
+        },
+        {field: 'createdAt', headerName: 'Created At', flex: 1},
+        {
+            field: 'actions', headerName: 'Actions', flex: 1,
+            renderCell: renderActionsCell
         }
     ];
+
+    function renderActionsCell(row: GridRenderCellParams) {
+        return (
+            <IconButton
+                color="secondary"
+                onClick={() => {
+                    console.log(row.id)
+                }}
+                aria-label="Delete"
+            >
+                <DeleteIcon/>
+            </IconButton>
+        )
+    }
+
+    function renderIsActiveCell(row: GridRenderCellParams) {
+        return (
+            <Typography color={row.value ? 'primary' : 'error'}>
+                {row.value ? 'Active' : 'Inactive'}
+            </Typography>
+        )
+    }
 
     return (
         <Box maxWidth="lg" sx={{mt: 4, mb: 4}}>

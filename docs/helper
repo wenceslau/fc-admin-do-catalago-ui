@@ -8,3 +8,6 @@
 
 ⇒ npm install @mui/x-data-grid
     command to install material ui data grid
+
+⇒ npm install @mui/material @emotion/react @emotion/styled
+    command to install material ui
