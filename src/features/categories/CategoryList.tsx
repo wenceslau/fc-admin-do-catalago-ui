@@ -3,7 +3,13 @@ import {Link} from "react-router-dom";
 import {useAppSelector} from "../../app/hooks";
 import {selectCategories} from "./categorySlice";
 import DeleteIcon from '@mui/icons-material/Delete';
-import {DataGrid, GridRowsProp, GridColDef, GridRenderCellParams, renderActionsCell} from "@mui/x-data-grid";
+import {
+    DataGrid,
+    GridRowsProp,
+    GridColDef,
+    GridRenderCellParams,
+    GridToolbar
+} from "@mui/x-data-grid";
 
 export const CategoryList = () => {
 
@@ -72,9 +78,24 @@ export const CategoryList = () => {
             </Box>
             <div style={{height: 300, width: '100%'}}>
                 <DataGrid
-                    pageSize={3}
+                    components={{Toolbar: GridToolbar}}
                     rowsPerPageOptions={[4, 10, 20]}
-                    rows={rows} columns={columns}/>
+                    disableColumnSelector={true}
+                    disableColumnFilter={true}
+                    disableDensitySelector={true}
+                    // checkboxSelection={true}
+                    disableSelectionOnClick={true}
+
+                    pageSize={3}
+                    rows={rows}
+                    columns={columns}
+                    componentsProps={{
+                        toolbar: {
+                            showQuickFilter: true,
+                            quickFilterProps: {debounceMs: 500}
+                        }
+                    }}
+                />
             </div>
         </Box>
     )
