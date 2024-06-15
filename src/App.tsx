@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {ThemeProvider} from '@mui/system';
 import {Box, Typography} from '@mui/material';
 import Header from './components/Header';
