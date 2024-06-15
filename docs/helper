@@ -11,3 +11,16 @@
 
 ⇒ npm install @mui/material @emotion/react @emotion/styled
     command to install material ui
+
+⇒ npm init @eslint/config@latest
+    command to install eslint (when it is not installed on project creation)
+    add this entry "eslint ./src/**/*.{ts,tsx};" in package.json scripts area
+
+⇒ npm install eslint-plugin-json eslint-plugin-json-format --save-dev
+    command to install eslint json plugin,
+
+⇒ ⇒ npm run lint
+    command to run lint
+
+⇒ npm run lint -- --fix
+    command to run lint with fix
