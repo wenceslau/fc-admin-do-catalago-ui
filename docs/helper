@@ -24,3 +24,16 @@
 
 ⇒ npm run lint -- --fix
     command to run lint with fix
+
+⇒ npm install --save-dev husky
+    command to install husky
+
+⇒ npm install @commitlint/cli --save-dev
+⇒ npm install @commitlint/config-conventional --save-dev
+    command to install commitlint, it is not required for husky, only if you want to use commitlint convention
+
+⇒ npx husky init
+    command to initializer husky, it will create .husky folder
+
+⇒ echo "npm test" > .husky/pre-commit
+    command to add pre-commit hook

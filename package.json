@@ -30,7 +30,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint ./src/**/*.{ts,tsx}"
+    "lint": "eslint ./src/**/*.{ts,tsx}",
+    "prepare": "husky"
   },
   "eslintConfig": {
     "extends": [
@@ -75,7 +76,10 @@
     ]
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
     "eslint-plugin-json": "^4.0.0",
-    "eslint-plugin-json-format": "^2.0.1"
+    "eslint-plugin-json-format": "^2.0.1",
+    "husky": "^9.0.11"
   }
 }
