@@ -9,15 +9,15 @@ import {
   Switch,
   TextField,
   Typography
-} from '@mui/material';
-import {Link, useParams} from 'react-router-dom';
-import {useAppSelector} from '../../app/hooks';
-import {selectCategoryById} from './categorySlice';
-import {useState} from 'react';
+} from "@mui/material";
+import {Link, useParams} from "react-router-dom";
+import {useAppSelector} from "../../app/hooks";
+import {selectCategoryById} from "./categorySlice";
+import {useState} from "react";
 
 export const CategoryEdit = () => {
 
-  const id = useParams().id || '';
+  const id = useParams().id || "";
   const [isDisabled, setIsDisabled] = useState(false);
   const category = useAppSelector((state) => selectCategoryById(state, id));
 
@@ -70,7 +70,7 @@ export const CategoryEdit = () => {
                         onChange={handleChange}
                         name="is_active"
                         color="secondary"
-                        inputProps={{'aria-label': 'controlled'}}
+                        inputProps={{"aria-label": "controlled"}}
                       />
                     }
                     label="Active"

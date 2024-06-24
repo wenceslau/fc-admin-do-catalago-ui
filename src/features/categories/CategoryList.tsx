@@ -1,9 +1,9 @@
-import {Box, Button, IconButton, Typography} from '@mui/material';
-import {Link} from 'react-router-dom';
-import {useAppSelector} from '../../app/hooks';
-import {selectCategories} from './categorySlice';
-import DeleteIcon from '@mui/icons-material/Delete';
-import {DataGrid, GridColDef, GridRenderCellParams, GridRowsProp, GridToolbar} from '@mui/x-data-grid';
+import {Box, Button, IconButton, Typography} from "@mui/material";
+import {Link} from "react-router-dom";
+import {useAppSelector} from "../../app/hooks";
+import {selectCategories} from "./categorySlice";
+import DeleteIcon from "@mui/icons-material/Delete";
+import {DataGrid, GridColDef, GridRenderCellParams, GridRowsProp, GridToolbar} from "@mui/x-data-grid";
 
 export const CategoryList = () => {
 
@@ -15,31 +15,31 @@ export const CategoryList = () => {
     name: category.name,
     description: category.description,
     isActive: category.is_active,
-    createdAt: new Date(category.created_at).toLocaleDateString('pt-BR')
+    createdAt: new Date(category.created_at).toLocaleDateString("pt-BR")
   }));
 
   const columns: GridColDef[] = [
-    {field: 'id', headerName: 'ID', flex: 1},
+    {field: "id", headerName: "ID", flex: 1},
     {
-      field: 'name', headerName: 'Name', flex: 1,
+      field: "name", headerName: "Name", flex: 1,
       renderCell: renderNameCell()
     },
-    {field: 'description', headerName: 'Description', flex: 1},
+    {field: "description", headerName: "Description", flex: 1},
     {
-      field: 'isActive', headerName: 'Active', flex: 1, type: 'boolean',
+      field: "isActive", headerName: "Active", flex: 1, type: "boolean",
       renderCell: renderIsActiveCell,
     },
-    {field: 'createdAt', headerName: 'Created At', flex: 1},
+    {field: "createdAt", headerName: "Created At", flex: 1},
     {
-      field: 'actions', headerName: 'Actions', flex: 1,
+      field: "actions", headerName: "Actions", flex: 1,
       renderCell: renderActionsCell
     }
   ];
 
   function renderNameCell() {
     return (rowData: GridRenderCellParams) => (
-      <Link to={`/categories/edit/${rowData.id}`}>
-        <Typography color="primary" style={{textDecoration: 'none'}}>
+      <Link to={`/categories/edit/${rowData.id}`} style={{textDecoration: "none"}}>
+        <Typography color="primary" >
           {rowData.value}
         </Typography>
       </Link>
@@ -62,28 +62,27 @@ export const CategoryList = () => {
 
   function renderIsActiveCell(row: GridRenderCellParams) {
     return (
-      <Typography color={row.value ? 'primary' : 'error'}>
-        {row.value ? 'Active' : 'Inactive'}
+      <Typography color={row.value ? "primary" : "error"}>
+        {row.value ? "Active" : "Inactive"}
       </Typography>
     );
   }
 
-
   return (
     <Box maxWidth="lg" sx={{mt: 4, mb: 4}}>
-      <Box display={'flex'} justifyContent={'flex-end'}>
+      <Box display={"flex"} justifyContent={"flex-end"}>
         <Button
           variant="contained"
           color="secondary"
           component={Link}
           to="/categories/create"
-          style={{marginBottom: '1rem'}}
+          style={{marginBottom: "1rem"}}
         >
           New Category
         </Button>
 
       </Box>
-      <Box sx={{display: 'flex', height: 600}}>
+      <Box sx={{display: "flex", height: 600}}>
         <DataGrid
           components={{Toolbar: GridToolbar}}
           rowsPerPageOptions={[4, 10, 20]}
