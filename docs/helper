@@ -38,6 +38,6 @@
 ⇒ echo "npm test" > .husky/pre-commit
     command to add pre-commit hook
 
+npm install notistack
 
-npm install uuid
 

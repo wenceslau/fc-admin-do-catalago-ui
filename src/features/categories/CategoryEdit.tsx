@@ -4,6 +4,7 @@ import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {Category, selectCategoryById, updateCategory} from "./categorySlice";
 import React, {useState} from "react";
 import {CategoryForm} from "./components/CategoryForm";
+import {useSnackbar} from "notistack";
 
 export const CategoryEdit = () => {
 
@@ -14,6 +15,7 @@ export const CategoryEdit = () => {
   const [categoryState, setCategoryState] = useState<Category>(category);
 
   const dispatch = useAppDispatch();
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = e.target;
@@ -31,6 +33,7 @@ export const CategoryEdit = () => {
     e.preventDefault();
     console.log("categoryState", categoryState);
     dispatch((updateCategory(categoryState)));
+    enqueueSnackbar("Category updated", {variant: "success"});
   }
 
   return (

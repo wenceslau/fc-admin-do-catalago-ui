@@ -8,29 +8,37 @@ import {Route, Routes} from "react-router-dom";
 import {CategoryList} from "./features/categories/CategoryList";
 import {CategoryEdit} from "./features/categories/CategoryEdit";
 import {CategoryCreate} from "./features/categories/CategoryCreate";
+import {SnackbarProvider} from "notistack";
+
 
 function App() {
   return (
     <ThemeProvider theme={appTheme}>
-      <Box
-        component="main"
-        sx={{
-          height: "100vh",
-          backgroundColor: (theme) => theme.palette.grey[900]
-        }}
-      >
-        <Header/>
-        <Layout>
-          <Routes>
-            <Route path='/' element={<CategoryList/>}/>
-            <Route path={"/categories"} element={<CategoryList/>}/>
-            <Route path={"/categories/create"} element={<CategoryCreate/>}/>
-            <Route path={"/categories/edit/:id"} element={<CategoryEdit/>}/>
-            <Route path="*" element={<Typography variant="h3" component="h1">Page Not Found</Typography>}/>
-          </Routes>
 
-        </Layout>
-      </Box>
+      <SnackbarProvider maxSnack={3} anchorOrigin={{
+        vertical: "top",
+        horizontal: "right"
+      }}>
+        <Box
+          component="main"
+          sx={{
+            height: "100vh",
+            backgroundColor: (theme) => theme.palette.grey[900]
+          }}
+        >
+          <Header/>
+          <Layout>
+            <Routes>
+              <Route path='/' element={<CategoryList/>}/>
+              <Route path={"/categories"} element={<CategoryList/>}/>
+              <Route path={"/categories/create"} element={<CategoryCreate/>}/>
+              <Route path={"/categories/edit/:id"} element={<CategoryEdit/>}/>
+              <Route path="*" element={<Typography variant="h3" component="h1">Page Not Found</Typography>}/>
+            </Routes>
+
+          </Layout>
+        </Box>
+      </SnackbarProvider>
 
     </ThemeProvider>
   );
