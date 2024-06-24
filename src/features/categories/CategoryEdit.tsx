@@ -14,6 +14,7 @@ import {Link, useParams} from "react-router-dom";
 import {useAppSelector} from "../../app/hooks";
 import {selectCategoryById} from "./categorySlice";
 import {useState} from "react";
+import {CategoryForm} from "./components/CategoryForm";
 
 export const CategoryEdit = () => {
 
@@ -35,68 +36,15 @@ export const CategoryEdit = () => {
             Edit Category
           </Typography>
         </Box>
-        <Box p={2} gap={2}>
-          <form>
-            <Grid container spacing={3}>
 
-              <Grid item xs={12}>
-                <FormControl fullWidth>
-                  <TextField
-                    required
-                    label="Name"
-                    value={category?.name}
-                    disabled={isDisabled}
-                    onChange={handleChange}
-                  ></TextField>
-                </FormControl>
-              </Grid>
-              <Grid item xs={12}>
-                <FormControl fullWidth>
-                  <TextField
-                    required
-                    label="Description"
-                    value={category?.description}
-                    disabled={isDisabled}
-                    onChange={handleTogle}
-                  ></TextField>
-                </FormControl>
-              </Grid>
-              <Grid item xs={12}>
-                <FormGroup>
-                  <FormControlLabel
-                    control={
-                      <Switch
-                        checked={category?.is_active}
-                        onChange={handleChange}
-                        name="is_active"
-                        color="secondary"
-                        inputProps={{"aria-label": "controlled"}}
-                      />
-                    }
-                    label="Active"
-                  />
-                </FormGroup>
-              </Grid>
-              <Grid item xs={12}>
-                <Box display="flex" gap={2}>
-                  <Button variant="contained" component={Link} to="/categories">
-                    Back
-                  </Button>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="secondary"
-                    disabled={isDisabled}
-                  >
-                    Save
-                  </Button>
+        <CategoryForm
+          category={category}
+          isDisabled={isDisabled}
+          onSubmit={handleChange}
+          handleChange={handleChange}
+          handleToggle={handleTogle}
+        />
 
-                </Box>
-              </Grid>
-            </Grid>
-
-          </form>
-        </Box>
       </Box>
 
     </Paper>
