@@ -1,13 +1,14 @@
 import {Box, Button, IconButton, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
-import {useAppSelector} from "../../app/hooks";
-import {selectCategories} from "./categorySlice";
+import {useAppDispatch, useAppSelector} from "../../app/hooks";
+import {deleteCategory, selectCategories} from "./categorySlice";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {DataGrid, GridColDef, GridRenderCellParams, GridRowsProp, GridToolbar} from "@mui/x-data-grid";
 
 export const CategoryList = () => {
 
   const categories = useAppSelector(selectCategories);
+  const dispatch = useAppDispatch();
 
   //create from catgories
   const rows: GridRowsProp = categories.map((category) => ({
@@ -36,6 +37,11 @@ export const CategoryList = () => {
     }
   ];
 
+  function handlerDelete(id: string) {
+    console.log(id);
+    dispatch(deleteCategory(id));
+  }
+
   function renderNameCell() {
     return (rowData: GridRenderCellParams) => (
       <Link to={`/categories/edit/${rowData.id}`} style={{textDecoration: "none"}}>
@@ -51,7 +57,8 @@ export const CategoryList = () => {
       <IconButton
         color="secondary"
         onClick={() => {
-          console.log(row.id);
+          console.log(row);
+          handlerDelete(row.id as string);
         }}
         aria-label="Delete"
       >
@@ -92,7 +99,7 @@ export const CategoryList = () => {
           // checkboxSelection={true}
           disableSelectionOnClick={true}
 
-          pageSize={3}
+          pageSize={6}
           rows={rows}
           columns={columns}
           componentsProps={{

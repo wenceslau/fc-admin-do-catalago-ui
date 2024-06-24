@@ -3,16 +3,16 @@ import {RootState} from "../../app/store";
 
 export interface Category {
   id: string;
-  name: string;
+  name: null | string;
   is_active: boolean;
   created_at: string;
-  updated_at: string;
+  updated_at: null | string;
   deleted_at: null | string;
   description: null | string;
 }
 
 const category: Category = {
-  id: "1",
+  id: id(),
   name: "Category 1",
   is_active: true,
   created_at: "2021-10-01T00:00:00.000000Z",
@@ -25,7 +25,7 @@ export const initialState = [
   category,
   {
     ...category,
-    id: "2",
+    id:  id(),
     name: "Category 2",
     description: "Category 2 description",
     created_at: "2021-10-02T00:00:00.000000Z",
@@ -33,7 +33,7 @@ export const initialState = [
   },
   {
     ...category,
-    id: "3",
+    id:  id(),
     name: "Category 3",
     description: "Category 3 description",
     created_at: "2021-10-02T00:00:00.000000Z",
@@ -41,78 +41,59 @@ export const initialState = [
   },
   {
     ...category,
-    id: "4",
+    id:  id(),
     name: "Category 4",
     description: "Category 4 description",
     created_at: "2021-10-02T00:00:00.000000Z",
     is_active: false,
   },
-  {
-    ...category,
-    id: "5",
-    name: "Category 5",
-    description: "Category 5 description",
-    created_at: "2021-10-02T00:00:00.000000Z",
-    is_active: false,
-  },
-  {
-    ...category,
-    id: "6",
-    name: "Category 6",
-    description: "Category 6 description",
-    created_at: "2021-10-02T00:00:00.000000Z",
-    is_active: false,
-  },
-  {
-    ...category,
-    id: "7",
-    name: "Category 7",
-    description: "Category 7 description",
-    created_at: "2021-10-02T00:00:00.000000Z",
-    is_active: false,
-  },
-  {
-    ...category,
-    id: "8",
-    name: "Category 8",
-    description: "Category 8 description",
-    created_at: "2021-10-02T00:00:00.000000Z",
-    is_active: false,
-  },
-  {
-    ...category,
-    id: "9",
-    name: "Category 9",
-    description: "Category 9 description",
-    created_at: "2021-10-02T00:00:00.000000Z",
-    is_active: false,
-  },
-  {
-    ...category,
-    id: "10",
-    name: "Category 10",
-    description: "Category 10 description",
-    created_at: "2021-10-02T00:00:00.000000Z",
-    is_active: false,
-  }
 ];
+
+function id(): string {
+  return Math.floor(Math.random() * 1000).toString();
+}
 
 const categoriesSlice = createSlice({
   name: "categories",
   initialState: initialState,
   reducers: {
     createCategory(state, action) {
+      state.push(action.payload);
     },
     updateCategory(state, action) {
+      const index = state.findIndex((category) => category.id === action.payload.id);
+      state[index] = action.payload;
+      //or
+      // const {id, name, description, is_active} = action.payload;
+      // const existingCategory = state.find((category) => category.id === id);
+      // if (existingCategory) {
+      //   existingCategory.name = name;
+      //   existingCategory.description = description;
+      //   existingCategory.is_active = is_active;
+      // }
     },
     deleteCategory(state, action) {
+      const index = state.findIndex((category) => category.id === action.payload.id);
+      state.splice(index, 1);
     },
   },
 });
 
 export const selectCategories = (state: RootState) => state.categories;
 
-export const selectCategoryById = (state: RootState, id: string) =>
-  state.categories.find((category) => category.id === id);
+export const selectCategoryById = (state: RootState, id: string) => {
+  const category = state.categories.find((category) => category.id === id);
+  return category || {
+    id: "",
+    name: "",
+    is_active: false,
+    created_at: "",
+    updated_at: null,
+    deleted_at: null,
+    description: null,
+  };
+};
 
 export default categoriesSlice.reducer;
+export const {createCategory, updateCategory, deleteCategory} =
+  categoriesSlice.actions;

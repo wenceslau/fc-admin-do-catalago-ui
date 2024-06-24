@@ -1,31 +1,37 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  FormControlLabel,
-  FormGroup,
-  Grid,
-  Paper,
-  Switch,
-  TextField,
-  Typography
-} from "@mui/material";
-import {Link, useParams} from "react-router-dom";
-import {useAppSelector} from "../../app/hooks";
-import {selectCategoryById} from "./categorySlice";
-import {useState} from "react";
+import {Box, Paper, Typography} from "@mui/material";
+import {useParams} from "react-router-dom";
+import {useAppDispatch, useAppSelector} from "../../app/hooks";
+import {Category, selectCategoryById, updateCategory} from "./categorySlice";
+import React, {useState} from "react";
 import {CategoryForm} from "./components/CategoryForm";
 
 export const CategoryEdit = () => {
 
   const id = useParams().id || "";
-  const [isDisabled, setIsDisabled] = useState(false);
   const category = useAppSelector((state) => selectCategoryById(state, id));
 
-  const handleChange = () => {
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [categoryState, setCategoryState] = useState<Category>(category);
+
+  const dispatch = useAppDispatch();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = e.target;
+    console.log(name, value);
+    setCategoryState({...categoryState, [name]: value});
   };
-  const handleTogle = () => {
+
+  const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {name, checked} = e.target;
+    console.log(name, checked);
+    setCategoryState({...categoryState, [name]: checked});
   };
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    console.log("categoryState", categoryState);
+    dispatch((updateCategory(categoryState)));
+  }
 
   return (
     <Paper>
@@ -38,11 +44,11 @@ export const CategoryEdit = () => {
         </Box>
 
         <CategoryForm
-          category={category}
+          category={categoryState}
           isDisabled={isDisabled}
-          onSubmit={handleChange}
+          handleSubmit={handleSubmit}
           handleChange={handleChange}
-          handleToggle={handleTogle}
+          handleToggle={handleToggle}
         />
 
       </Box>

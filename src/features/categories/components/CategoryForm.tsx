@@ -1,29 +1,32 @@
-import React from "react";
-import {Box, Button, FormControl, FormControlLabel, FormGroup, Grid, Switch, TextField} from "@mui/material";
+import {Box, Button, FormControl, FormControlLabel, FormGroup, Grid, Switch, TextField,} from "@mui/material";
+
 import {Link} from "react-router-dom";
 import {Category} from "../categorySlice";
 
 type Props = {
-  category?: Category;
+  category: Category;
   isDisabled?: boolean;
-  onLoading?: boolean;
-  onSubmit: (e: React.FormEvent<HTMLFieldSetElement>) => void;
+  isLoading?: boolean;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleToggle: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
+export function CategoryForm(
+  {
+    category,
+    isDisabled = false,
+    isLoading = false,
+    handleSubmit,
+    handleChange,
+    handleToggle,
+  }: Props) {
 
-export function CategoryForm({
-                               category,
-                               isDisabled,
-                               onLoading,
-                               onSubmit,
-                               handleChange,
-                               handleToggle,
-                             }: Props) {
+  console.log(JSON.stringify(category));
+
   return (
     <Box p={2} gap={2}>
-      <form>
+      <form onSubmit={handleSubmit}>
         <Grid container spacing={3}>
 
           <Grid item xs={12}>
@@ -31,10 +34,12 @@ export function CategoryForm({
               <TextField
                 required
                 label="Name"
+                name="name"
                 value={category?.name}
+                defaultValue=" "
                 disabled={isDisabled}
-                onChange={handleChange}
-              ></TextField>
+                onChange={handleChange}>
+              </TextField>
             </FormControl>
           </Grid>
           <Grid item xs={12}>
@@ -42,10 +47,11 @@ export function CategoryForm({
               <TextField
                 required
                 label="Description"
-                value={category?.description}
+                name="description"
+                value={category?.description || null}
                 disabled={isDisabled}
-                onChange={handleToggle}
-              ></TextField>
+                onChange={handleChange}>
+              </TextField>
             </FormControl>
           </Grid>
           <Grid item xs={12}>
@@ -53,11 +59,12 @@ export function CategoryForm({
               <FormControlLabel
                 control={
                   <Switch
-                    checked={category?.is_active}
-                    onChange={handleChange}
                     name="is_active"
                     color="secondary"
                     inputProps={{"aria-label": "controlled"}}
+                    checked={category?.is_active || false}
+                    disabled={isDisabled}
+                    onChange={handleToggle}
                   />
                 }
                 label="Active"
@@ -73,11 +80,9 @@ export function CategoryForm({
                 type="submit"
                 variant="contained"
                 color="secondary"
-                disabled={isDisabled}
-              >
+                disabled={isDisabled}>
                 Save
               </Button>
-
             </Box>
           </Grid>
         </Grid>
