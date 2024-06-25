@@ -1,23 +1,29 @@
 import {Box, Button, IconButton, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
-import {deleteCategory, selectCategories} from "./categorySlice";
+import {selectCategories, useDeleteCategoryMutation, useGetCategoriesQuery} from "./categorySlice";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {DataGrid, GridColDef, GridRenderCellParams, GridRowsProp, GridToolbar} from "@mui/x-data-grid";
+import {enqueueSnackbar} from "notistack";
+import {useEffect} from "react";
 
 export const CategoryList = () => {
+  const {data, isFetching, error} = useGetCategoriesQuery();
+  const [deleteCategory, deleteCategoryStatus] = useDeleteCategoryMutation();
+
+  console.log(data);
 
   const categories = useAppSelector(selectCategories);
   const dispatch = useAppDispatch();
 
   //create from catgories
-  const rows: GridRowsProp = categories.map((category) => ({
+  const rows: GridRowsProp = data ? data.items.map((category) => ({
     id: category.id,
     name: category.name,
     description: category.description,
     isActive: category.is_active,
     createdAt: new Date(category.created_at).toLocaleDateString("pt-BR")
-  }));
+  })) : [];
 
   const columns: GridColDef[] = [
     {field: "id", headerName: "ID", flex: 1},
@@ -37,10 +43,22 @@ export const CategoryList = () => {
     }
   ];
 
-  function handlerDelete(id: string) {
-    console.log(id);
-    dispatch(deleteCategory(id));
+ async  function handlerDelete(id: string) {
+    await deleteCategory({id});
   }
+
+  useEffect(() => {
+    if (error) {
+      enqueueSnackbar("Error fetching categories", {variant: "error"});
+    }
+    if (deleteCategoryStatus.isSuccess) {
+      enqueueSnackbar("Category deleted successfully", {variant: "success"});
+    }
+    if (deleteCategoryStatus.error) {
+      enqueueSnackbar("Category not deleted", {variant: "error"});
+    }
+
+  }, [deleteCategoryStatus, error]);
 
   function renderNameCell() {
     return (rowData: GridRenderCellParams) => (
