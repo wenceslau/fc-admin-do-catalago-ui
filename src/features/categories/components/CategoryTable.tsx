@@ -1,5 +1,5 @@
 import {Results} from "../../../types/Category";
-import {DataGrid, GridColDef, GridFilterModel, GridRenderCellParams, GridRowsProp} from "@mui/x-data-grid";
+import {DataGrid, GridColDef, GridFilterModel, GridRenderCellParams, GridRowsProp, GridToolbar} from "@mui/x-data-grid";
 import {Link} from "react-router-dom";
 import {Box, IconButton, Typography} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -9,7 +9,7 @@ type Props = {
   data: Results | undefined;
   perPage: number;
   isFetching: boolean;
-  rowsPerPage?: number;
+  rowsPerPage?: number[];
 
   handleOnPageChange: (page: number) => void;
   handleFilterChange: (filterModel: GridFilterModel) => void;
@@ -22,7 +22,7 @@ export function CategoryTable(
     data,
     perPage,
     isFetching,
-    rowsPerPage = 10,
+    rowsPerPage,
     handleOnPageChange,
     handleFilterChange,
     handleOnPageSizeChange,
@@ -99,10 +99,29 @@ export function CategoryTable(
   }
 
   const rows = data ? mapDataToGridRows(data) : [];
-
+  const rowCount = data?.items.length || 0;
   return (
     <Box sx={{display: "flex", height: 600}} >
-      <DataGrid rows={rows} columns={columns} />
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={perPage}
+        rowCount={rowCount}
+        loading={isFetching}
+        rowsPerPageOptions={rowsPerPage}
+        componentsProps={componentsProps}
+        filterMode="server"
+        paginationMode="server"
+        checkboxSelection={false}
+        disableColumnFilter={true}
+        disableColumnSelector={true}
+        disableDensitySelector={true}
+        disableSelectionOnClick={true}
+        components={{Toolbar: GridToolbar}}
+        onPageChange={handleOnPageChange}
+        onFilterModelChange={handleFilterChange}
+        onPageSizeChange={handleOnPageSizeChange}
+      />
     </Box>
   );
 }
