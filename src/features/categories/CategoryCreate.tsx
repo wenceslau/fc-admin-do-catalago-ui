@@ -1,45 +1,49 @@
 import {Box, Paper, Typography} from "@mui/material";
-import React, {useState} from "react";
-import {Category, createCategory} from "./categorySlice";
-import {CategoryForm} from "./components/CategoryForm";
-import {useAppDispatch} from "../../app/hooks";
 import {useSnackbar} from "notistack";
+import {useEffect, useState} from "react";
+import {useCreateCategoryMutation} from "./categorySlice";
+import {CategoryForm} from "./components/CategoryForm";
+import {Category} from "../../types/Category";
 
 
 export const CategoryCreate = () => {
-
+  const {enqueueSnackbar} = useSnackbar();
+  const [createCategory, status] = useCreateCategoryMutation();
   const [isDisabled, setIsDisabled] = useState(false);
   const [categoryState, setCategoryState] = useState<Category>({
-    id: Math.floor(Math.random() * 1000).toString(),
+    id: "",
     name: "",
-    is_active: true,
+    is_active: false,
     created_at: "",
     updated_at: "",
-    deleted_at: null,
-    description: null,
+    deleted_at: "",
+    description: "",
   });
-  const dispatch = useAppDispatch();
-  const { enqueueSnackbar } = useSnackbar();
 
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    await createCategory(categoryState);
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = e.target;
-    console.log(name, value);
     setCategoryState({...categoryState, [name]: value});
   };
 
   const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {name, checked} = e.target;
-    console.log(name, checked);
     setCategoryState({...categoryState, [name]: checked});
   };
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    console.log("category", categoryState);
-    dispatch((createCategory(categoryState)));
-    enqueueSnackbar("Category created", {variant: "success"});
-  }
+  useEffect(() => {
+    if (status.isSuccess) {
+      enqueueSnackbar("Category created successfully", {variant: "success"});
+      setIsDisabled(true);
+    }
+    if (status.error) {
+      enqueueSnackbar("Category not created", {variant: "error"});
+    }
+  }, [enqueueSnackbar, status.error, status.isSuccess]);
 
   return (
     <Paper>

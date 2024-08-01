@@ -7,18 +7,19 @@ import {CategoryTable} from "./components/CategoryTable";
 import {GridFilterModel} from "@mui/x-data-grid";
 
 export const CategoryList = () => {
-  const {data, isFetching, error} = useGetCategoriesQuery();
+  const [options, setOptions] = useState({
+    page: 0,
+    search: "",
+    perPage: 2,
+    rowsPerPage: [2, 5, 10, 20],
+  });
+  const {data, isFetching, error} = useGetCategoriesQuery(options);
   const [deleteCategory, deleteCategoryStatus] = useDeleteCategoryMutation();
   const {enqueueSnackbar} = useSnackbar();
-  const [options, setOptions] = useState({
-    page: 1,
-    search: "",
-    perPage: 5,
-    rowsPerPage: [5, 10, 20],
-  });
+
 
   function handleOnPageChange(page: number) {
-    setOptions({ ...options, page: page + 1 });
+    setOptions({ ...options, page: page });
   }
 
   function handleOnPageSizeChange(perPage: number) {

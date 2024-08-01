@@ -5,6 +5,10 @@ export interface Results {
   items: Category[];
 }
 
+export interface CategoryID {
+  id: string;
+}
+
 export interface Category {
   id: string;
   name: string;

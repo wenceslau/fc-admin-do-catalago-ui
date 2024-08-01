@@ -4,7 +4,7 @@ const baseURL = "http://localhost:8081/";
 
 export const apiSlice = createApi({
   reducerPath: "api",
-  tagTypes: ["Categories"],
+  tagTypes: ["Categories"], //create automatically store for categories in redux
   endpoints: (builder) => ({}),
   baseQuery: fetchBaseQuery({baseUrl: baseURL})
 });

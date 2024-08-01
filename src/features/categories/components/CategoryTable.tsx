@@ -1,9 +1,8 @@
-import {Results} from "../../../types/Category";
-import {DataGrid, GridColDef, GridFilterModel, GridRenderCellParams, GridRowsProp, GridToolbar} from "@mui/x-data-grid";
+import {Category, Results} from "../../../types/Category";
+import {DataGrid, GridColDef, GridFilterModel, GridRenderCellParams, GridToolbar} from "@mui/x-data-grid";
 import {Link} from "react-router-dom";
 import {Box, IconButton, Typography} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import {Category} from "../categorySlice";
 
 type Props = {
   data: Results | undefined;
@@ -54,8 +53,12 @@ export function CategoryTable(
     }
   ];
 
+  const rows = data ? mapDataToGridRows(data) : [];
+
+  const rowCount = data?.total || 0;
+
   function mapDataToGridRows(items: Results) {
-    const { items: categories } = items;
+    const {items: categories} = items;
     return categories.map((category: Category) => ({
       id: category.id,
       name: category.name,
@@ -98,10 +101,8 @@ export function CategoryTable(
     );
   }
 
-  const rows = data ? mapDataToGridRows(data) : [];
-  const rowCount = data?.items.length || 0;
   return (
-    <Box sx={{display: "flex", height: 600}} >
+    <Box sx={{display: "flex", height: 600}}>
       <DataGrid
         rows={rows}
         columns={columns}
