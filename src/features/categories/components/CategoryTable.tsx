@@ -56,7 +56,7 @@ export function CategoryTable(
 
   const rows = data ? mapDataToGridRows(data) : [];
 
-  const rowCount = data?.items.length || 0;
+  const rowCount = data?.total || 0;
 
   function mapDataToGridRows(items: Results) {
     const {items: categories} = items;
