@@ -1,9 +1,8 @@
-import {Results} from "../../../types/Category";
+import {Category, Results} from "../../../types/Category";
 import {DataGrid, GridColDef, GridFilterModel, GridRenderCellParams, GridToolbar} from "@mui/x-data-grid";
 import {Link} from "react-router-dom";
 import {Box, IconButton, Typography} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import {Category} from "../categorySlice";
 
 type Props = {
   data: Results | undefined;

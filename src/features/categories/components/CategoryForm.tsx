@@ -1,7 +1,7 @@
 import {Box, Button, FormControl, FormControlLabel, FormGroup, Grid, Switch, TextField,} from "@mui/material";
 
 import {Link} from "react-router-dom";
-import {Category} from "../categorySlice";
+import {Category} from "../../../types/Category";
 
 type Props = {
   category: Category;
@@ -21,8 +21,6 @@ export function CategoryForm(
     handleChange,
     handleToggle,
   }: Props) {
-
-  console.log(JSON.stringify(category));
 
   return (
     <Box p={2} gap={2}>
@@ -48,7 +46,7 @@ export function CategoryForm(
                 required
                 label="Description"
                 name="description"
-                value={category?.description || null}
+                value={category?.description}
                 disabled={isDisabled}
                 onChange={handleChange}>
               </TextField>
