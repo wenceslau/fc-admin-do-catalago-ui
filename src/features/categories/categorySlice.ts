@@ -22,15 +22,14 @@ function deleteCategoryMutation(category: Category) {
   };
 }
 
-
 export const categoriesApiSlice = apiSlice.injectEndpoints({
   endpoints: ({query, mutation}) => ({
-    getCategories: query<Results, void>({
-      query: () => endpoint,
+    getCategories: query<Results, void>({ //Results is the response type defined in types/Category.ts
+      query: () => endpoint,  //endpoint is "/categories"
       providesTags: ["Categories"],
     }),
-    deleteCategory : mutation<void, {id: string}>({
-      query: deleteCategoryMutation,
+    deleteCategory : mutation<void, {id: string}>({ //void is the response type, {id: string} is the request type
+      query: deleteCategoryMutation,  //deleteCategoryMutation is a function that returns the url and method
       invalidatesTags: ["Categories"],
     }),
   }),
@@ -124,6 +123,6 @@ export const {createCategory, updateCategory, deleteCategory} =
   categoriesSlice.actions;
 
 export const {
-  useGetCategoriesQuery,
-  useDeleteCategoryMutation,
+  useGetCategoriesQuery,  // hook created automatically by redux, using the endpoint query getCategories
+  useDeleteCategoryMutation, // hook created automatically by redux, using the endpoint mutation deleteCategory
 } = categoriesApiSlice;
