@@ -12,6 +12,38 @@
 ⇒ npm install @mui/material @emotion/react @emotion/styled
     command to install material ui
 
+⇒ npm install @fontsource/roboto
+    command to install roboto font
+    or add this link in index.html
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+
+⇒ npm install @mui/icons-material
+    command to install material ui icons
+    or add this link in index.html
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons" />
+
+⇒ npm install react-router@6 react-router-dom@6
+    command to install react router v6
+
+⇒ npm install @mui/x-data-grid
+    command to install material ui data grid
+
+⇒ npm install notistack
+    command to install notistack
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ⇒ npm init @eslint/config@latest
     command to install eslint (when it is not installed on project creation)
     add this entry "eslint ./src/**/*.{ts,tsx};" in package.json scripts area
@@ -38,7 +70,6 @@
 ⇒ echo "npm test" > .husky/pre-commit
     command to add pre-commit hook
 
-⇒ npm install notistack
-    command to install notistack
+
 
 
