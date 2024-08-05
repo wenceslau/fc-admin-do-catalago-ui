@@ -9,6 +9,7 @@ import {CategoryList} from "./features/categories/CategoryList";
 import {CategoryEdit} from "./features/categories/CategoryEdit";
 import {CategoryCreate} from "./features/categories/CategoryCreate";
 import {SnackbarProvider} from "notistack";
+import {CastMemberList} from "./features/cast-members/CastMemberList";
 
 
 function App() {
@@ -33,6 +34,9 @@ function App() {
               <Route path={"/categories"} element={<CategoryList/>}/>
               <Route path={"/categories/create"} element={<CategoryCreate/>}/>
               <Route path={"/categories/edit/:id"} element={<CategoryEdit/>}/>
+
+              <Route path={"/cast-members"} element={<CastMemberList/>}/>
+
               <Route path="*" element={<Typography variant="h3" component="h1">Page Not Found</Typography>}/>
             </Routes>
 
