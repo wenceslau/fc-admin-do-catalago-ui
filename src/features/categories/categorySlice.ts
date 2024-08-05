@@ -3,6 +3,32 @@ import {apiSlice} from "../api/apiSlice";
 
 const endpoint = "/categories";
 
+function parseQueryParams(params: CategoryParams) {
+  const query = new URLSearchParams();
+
+  if (params.page || params.page === 0) {
+    query.append("page", params.page.toString());
+  }
+
+  if (params.perPage) {
+    query.append("perPage", params.perPage.toString());
+  }
+
+  if (params.search) {
+    query.append("search", params.search);
+  }
+
+  if (params.direction) {
+    query.append("direction", params.direction.toString());
+  }
+
+  if (params.sort) {
+    query.append("sort", params.sort.toString());
+  }
+
+  return query.toString();
+}
+
 function getCategories({ page = 0, perPage = 10, search = "" }) {
   const params = { page, perPage, search, direction: "desc", sort: "createdAt" };
   console.log(params);
@@ -34,54 +60,27 @@ function deleteCategoryMutation(category: Category) {
   };
 }
 
-
-function parseQueryParams(params: CategoryParams) {
-  const query = new URLSearchParams();
-
-  if (params.page || params.page === 0) {
-    query.append("page", params.page.toString());
-  }
-
-  if (params.perPage) {
-    query.append("perPage", params.perPage.toString());
-  }
-
-  if (params.search) {
-    query.append("search", params.search);
-  }
-
-  if (params.direction) {
-    query.append("direction", params.direction.toString());
-  }
-
-  if (params.sort) {
-    query.append("sort", params.sort.toString());
-  }
-
-  return query.toString();
-}
-
 export const categoriesApiSlice = apiSlice.injectEndpoints({
   endpoints: ({query, mutation}) => ({
     getCategories: query<Results, CategoryParams>({ //Results is the response type defined in types/Category.ts
       query: getCategories, //getCategories is a function that returns the url
-      providesTags: ["Categories"],
+      providesTags: ["Categories"], //providesTags: ["Categories"] will cache the data in the redux store
     }),
     getCategory: query<Category, { id: string }>({
       query: getCategory,
-      providesTags: ["Categories"],
+      providesTags: ["Categories"], //providesTags: ["Categories"] will cache the data in the redux store
     }),
     createCategory: mutation<CategoryID, Category>({
       query: createCategoryMutation,
-      invalidatesTags: ["Categories"],
+      invalidatesTags: ["Categories"], //invalidatesTags: ["Categories"] will re-fetch the data from the server, and update the cache with the new data
     }),
     updateCategory: mutation<CategoryID, Category>({
       query: updateCategoryMutation,
-      invalidatesTags: ["Categories"],
+      invalidatesTags: ["Categories"], //invalidatesTags: ["Categories"] will re-fetch the data from the server, and update the cache with the new data
     }),
     deleteCategory : mutation<void, {id: string}>({ //void is the response type, {id: string} is the request type
       query: deleteCategoryMutation,  //deleteCategoryMutation is a function that returns the url and method
-      invalidatesTags: ["Categories"],
+      invalidatesTags: ["Categories"], //invalidatesTags: ["Categories"] will re-fetch the data from the server, and update the cache with the new data
     }),
   }),
 });
