@@ -97,7 +97,7 @@ export function CastMembersTable({
   function renderTypeCell(rowData: GridRenderCellParams) {
     return (
       <Typography color="primary">
-        {rowData.value === 1 ? "Diretor" : "Actor"}
+        {rowData.value === "DIRECTOR" ? "Diretor" : "Actor"}
       </Typography>
     );
   }

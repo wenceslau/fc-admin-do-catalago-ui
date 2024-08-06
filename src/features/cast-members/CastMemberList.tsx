@@ -7,14 +7,13 @@ import {useSnackbar} from "notistack";
 import {CastMembersTable} from "./components/CastMembersTable";
 
 export function CastMemberList() {
+  const { enqueueSnackbar } = useSnackbar();
   const [options, setOptions] = useState({
     page: 0,
     search: "",
     perPage: 10,
-    rowsPerPage: [10, 20, 30],
+    rowsPerPage: [4, 10, 20, 30],
   });
-
-  const { enqueueSnackbar } = useSnackbar();
   const { data, isFetching, error } = useGetCastMembersQuery(options);
   const [deleteCastMember, deleteCastMemberStatus] =  useDeleteCastMemberMutation();
 
@@ -23,7 +22,7 @@ export function CastMemberList() {
   }
 
   function handleOnPageChange(page: number) {
-    setOptions({ ...options, page: page + 1 });
+    setOptions({ ...options, page: page });
   }
 
   function handleOnPageSizeChange(perPage: number) {
