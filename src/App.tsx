@@ -9,6 +9,9 @@ import {CategoryList} from "./features/categories/CategoryList";
 import {CategoryEdit} from "./features/categories/CategoryEdit";
 import {CategoryCreate} from "./features/categories/CategoryCreate";
 import {SnackbarProvider} from "notistack";
+import {CastMemberList} from "./features/cast-members/CastMemberList";
+import {CreateCastMember} from "./features/cast-members/components/CreateCastMembers";
+import {EditCastMember} from "./features/cast-members/components/EditCastMember";
 
 
 function App() {
@@ -33,6 +36,12 @@ function App() {
               <Route path={"/categories"} element={<CategoryList/>}/>
               <Route path={"/categories/create"} element={<CategoryCreate/>}/>
               <Route path={"/categories/edit/:id"} element={<CategoryEdit/>}/>
+
+              <Route path={"/cast-members"} element={<CastMemberList/>}/>
+              <Route path={"/cast-members/create"} element={<CreateCastMember/>}/>
+              <Route path={"/cast-members/edit/:id"} element={<EditCastMember/>}/>
+
+
               <Route path="*" element={<Typography variant="h3" component="h1">Page Not Found</Typography>}/>
             </Routes>
 
