@@ -32,6 +32,11 @@
     command to install notistack
 
 
+React testing library
+⇒ npm install --save-dev @testing-library/react @testing-library/jest-dom
+    command to install react testing library
+
+
 
 
 
