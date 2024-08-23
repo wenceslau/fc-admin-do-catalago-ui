@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 
 import { SnackbarProvider } from "notistack";
 import { BrowserRouter } from "react-router-dom";
-import {RootState} from "../app/store";
+import {AppStore, RootState, setupStore} from "../app/store";
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, "queries"> {
   preloadedState?: PreloadedState<RootState>;

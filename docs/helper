@@ -36,9 +36,8 @@ React testing library
 ⇒ npm install --save-dev @testing-library/react @testing-library/jest-dom
     command to install react testing library
 
-
-
-
+⇒ npm i msw@0.49.3 --save-dev
+    command to install msw
 
 
 
