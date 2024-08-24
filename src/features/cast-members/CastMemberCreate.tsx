@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { useSnackbar } from "notistack";
 import { Box } from "@mui/system";
 import { Paper, Typography } from "@mui/material";
-import {CastMemberForm} from "./CastMembersForm";
-import {CastMember} from "../../../types/CastMembers";
-import {initialState, useCreateCastMemberMutation} from "../castMembersSlice";
+import {CastMemberForm} from "./components/CastMembersForm";
+import {CastMember} from "../../types/CastMembers";
+import {initialState, useCreateCastMemberMutation} from "./castMembersSlice";
 
-export const CreateCastMember = () => {
+export const CastMemberCreate = () => {
   const [castMemberState, setCastMemberState] =
     useState<CastMember>(initialState);
   const [createCastMember, status] = useCreateCastMemberMutation();

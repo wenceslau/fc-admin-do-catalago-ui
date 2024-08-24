@@ -1,4 +1,4 @@
-import {Category, CategoryID, CategoryParams, Results} from "../../types/Category";
+import {Category, CategoryID, CategoryParams, Categories} from "../../types/Category";
 import {apiSlice} from "../api/apiSlice";
 
 const endpoint = "/categories";
@@ -62,7 +62,7 @@ function deleteCategoryMutation(category: Category) {
 
 export const categoriesApiSlice = apiSlice.injectEndpoints({
   endpoints: ({query, mutation}) => ({
-    getCategories: query<Results, CategoryParams>({ //Results is the response type defined in types/Category.ts
+    getCategories: query<Categories, CategoryParams>({ //Results is the response type defined in types/Category.ts
       query: getCategories, //getCategories is a function that returns the url
       providesTags: ["Categories"], //providesTags: ["Categories"] will cache the data in the redux store
     }),

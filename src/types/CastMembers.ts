@@ -1,4 +1,4 @@
-export interface Results {
+export interface CastMembers {
   current_page: number;
   per_page: number;
   total: number;

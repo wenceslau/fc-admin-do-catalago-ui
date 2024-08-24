@@ -6,33 +6,32 @@ import {
   GridRenderCellParams,
   GridToolbar,
 } from "@mui/x-data-grid";
-import { CastMembers } from "../../../types/CastMembers";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
 import { Box } from "@mui/system";
+import {Genres} from "../../../types/Genres";
 
 type Props = {
-  data: CastMembers | undefined;
+  data: Genres | undefined;
   perPage: number;
   isFetching: boolean;
   rowsPerPage?: number[];
-
   handleOnPageChange: (page: number) => void;
   handleFilterChange: (filterModel: GridFilterModel) => void;
   handleOnPageSizeChange: (perPage: number) => void;
   handleDelete: (id: string) => void;
 };
 
-export function CastMembersTable({
-                                   data,
-                                   perPage,
-                                   isFetching,
-                                   rowsPerPage,
-                                   handleOnPageChange,
-                                   handleFilterChange,
-                                   handleOnPageSizeChange,
-                                   handleDelete,
-                                 }: Props) {
+export function GenresTable({
+                              data,
+                              perPage,
+                              isFetching,
+                              rowsPerPage,
+                              handleOnPageChange,
+                              handleFilterChange,
+                              handleOnPageSizeChange,
+                              handleDelete,
+                            }: Props) {
   const componentProps = {
     toolbar: {
       showQuickFilter: true,
@@ -41,32 +40,22 @@ export function CastMembersTable({
   };
 
   const columns: GridColDef[] = [
+    { field: "name", headerName: "Name", flex: 1, renderCell: renderNameCell },
     {
-      flex: 1,
-      field: "name",
-      headerName: "Name",
-      renderCell: renderNameCell,
-    },
-    {
-      flex: 1,
-      field: "type",
-      headerName: "Type",
-      renderCell: renderTypeCell,
-    },
-    {
-      flex: 1,
       field: "id",
       headerName: "Actions",
+      type: "string",
+      flex: 1,
       renderCell: renderActionsCell,
     },
   ];
 
-  function mapDataToGridRows(data: CastMembers) {
-    const { items: castMembers } = data;
-    return castMembers.map((castMember) => ({
-      id: castMember.id,
-      name: castMember.name,
-      type: castMember.type,
+  function mapDataToGridRows(data: Genres) {
+    const { items: genres } = data;
+    return genres.map((genre) => ({
+      id: genre.id,
+      name: genre.name,
+      categories: genre.categories,
     }));
   }
 
@@ -87,18 +76,10 @@ export function CastMembersTable({
     return (
       <Link
         style={{ textDecoration: "none" }}
-        to={`/cast-members/edit/${rowData.id}`}
+        to={`/genres/edit/${rowData.id}`}
       >
         <Typography color="primary">{rowData.value}</Typography>
       </Link>
-    );
-  }
-
-  function renderTypeCell(rowData: GridRenderCellParams) {
-    return (
-      <Typography color="primary">
-        {rowData.value === "DIRECTOR" ? "Diretor" : "Actor"}
-      </Typography>
     );
   }
 

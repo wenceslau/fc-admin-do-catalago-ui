@@ -1,11 +1,11 @@
-import {Category, Results} from "../../../types/Category";
+import {Category, Categories} from "../../../types/Category";
 import {DataGrid, GridColDef, GridFilterModel, GridRenderCellParams, GridToolbar} from "@mui/x-data-grid";
 import {Link} from "react-router-dom";
 import {Box, IconButton, Typography} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 type Props = {
-  data: Results | undefined;
+  data: Categories | undefined;
   perPage: number;
   isFetching: boolean;
   rowsPerPage?: number[];
@@ -57,7 +57,7 @@ export function CategoryTable(
 
   const rowCount = data?.total || 0;
 
-  function mapDataToGridRows(items: Results) {
+  function mapDataToGridRows(items: Categories) {
     const {items: categories} = items;
     return categories.map((category: Category) => ({
       id: category.id,

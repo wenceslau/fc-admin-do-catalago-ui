@@ -3,11 +3,11 @@ import { useSnackbar } from "notistack";
 import { Box } from "@mui/system";
 import { Paper, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
-import {CastMember} from "../../../types/CastMembers";
-import {CastMemberForm} from "./CastMembersForm";
-import {initialState, useGetCastMemberQuery, useUpdateCastMemberMutation} from "../castMembersSlice";
+import {CastMember} from "../../types/CastMembers";
+import {CastMemberForm} from "./components/CastMembersForm";
+import {initialState, useGetCastMemberQuery, useUpdateCastMemberMutation} from "./castMembersSlice";
 
-export const EditCastMember = () => {
+export const CastMemberEdit = () => {
   const id = useParams().id ?? "";
   const { data: castMember, isFetching } = useGetCastMemberQuery({ id });
   const [castMemberState, setCastMemberState] =
