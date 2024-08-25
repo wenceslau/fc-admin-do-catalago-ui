@@ -1,4 +1,6 @@
 import { Genre } from "../../types/Genres";
+import { Category } from "../../types/Category";
+
 
 export const mapGenreToForm = (genre: Genre) => {
   return {
@@ -8,7 +10,8 @@ export const mapGenreToForm = (genre: Genre) => {
   };
 };
 
-export const mapGenreFromForm = (genre: Genre) => {
+export const mapGenreFromForm = (genre: Genre, categories: Category[] | undefined) => {
+
   return {
     id: genre.id,
     name: genre.name,
@@ -16,8 +19,8 @@ export const mapGenreFromForm = (genre: Genre) => {
     updated_at: genre.updated_at,
     deleted_at: genre.deleted_at,
     is_active: genre.is_active,
-    categories: genre.categories,
-    categories_id: genre.categories?.map((category) => category.id),
+    categories_id : genre.categories_id,
+    categories: categories?.filter((category) => genre.categories_id?.includes(category.id)),
     pivot: genre.pivot,
   };
 };

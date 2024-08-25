@@ -39,9 +39,9 @@ export const GenreEdit = () => {
 
   useEffect(() => {
     if (genre) {
-      setGenreState(mapGenreFromForm(genre));
+      setGenreState(mapGenreFromForm(genre, categories?.items));
     }
-  }, [genre]);
+  }, [genre, categories]);
 
   useEffect(() => {
     if (status.isSuccess) {

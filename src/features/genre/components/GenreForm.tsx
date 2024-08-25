@@ -1,7 +1,7 @@
 import {Box, Button, FormControl, Grid, TextField} from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
 
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import {Genre} from "../../../types/Genres";
 import {Category} from "../../../types/Category";
 
@@ -23,6 +23,9 @@ export function GenreForm({
                             handleSubmit,
                             handleChange,
                           }: Props) {
+
+  console.log("categories: " + genre.categories);
+
   return (
     <Box p={2}>
       <form onSubmit={handleSubmit}>
@@ -36,14 +39,13 @@ export function GenreForm({
                 value={genre.name}
                 disabled={isDisabled}
                 onChange={handleChange}
-                inputProps={{ "data-testid": "name" }}
+                inputProps={{"data-testid": "name"}}
               />
             </FormControl>
           </Grid>
 
           <Grid item xs={12}>
             <Autocomplete
-              filterSelectedOptions={false}
               multiple
               data-testid="categories-search"
               loading={isLoading}
@@ -59,7 +61,7 @@ export function GenreForm({
               )}
               onChange={(e, newValue) => {
                 handleChange({
-                  target: { name: "categories", value: newValue },
+                  target: {name: "categories", value: newValue},
                 } as any);
               }}
               renderInput={(params) => (
