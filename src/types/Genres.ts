@@ -19,6 +19,7 @@ export interface Genre {
   created_at: string;
   updated_at: string;
   categories?: Category[];
+  categories_id?: string[];
   pivot?: Pivot;
 }
 
@@ -31,7 +32,8 @@ export interface GenreParams {
   page?: number;
   perPage?: number;
   search?: string;
-  isActive?: boolean;
+  sort?: string;
+  direction?: string;
 }
 
 export interface GenrePayload {

@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, Grid, TextField } from "@mui/material";
+import {Box, Button, FormControl, Grid, TextField} from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
 
 import { Link } from "react-router-dom";
@@ -13,6 +13,7 @@ type Props = {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
+
 
 export function GenreForm({
                             genre,
@@ -42,6 +43,7 @@ export function GenreForm({
 
           <Grid item xs={12}>
             <Autocomplete
+              filterSelectedOptions={false}
               multiple
               data-testid="categories-search"
               loading={isLoading}

@@ -1,4 +1,3 @@
-// import { Categories } from "../../types/Category";
 import {
   Genre,
   GenreParams,
@@ -17,26 +16,31 @@ export const initialState = {
   deleted_at: null,
   is_active: false,
   categories: [],
+  categories_id: [],
   pivot: { genre_id: "", category_id: "" },
 };
 
 function parseQueryParams(params: GenreParams) {
   const query = new URLSearchParams();
 
-  if (params.page) {
+  if (params.page || params.page === 0) {
     query.append("page", params.page.toString());
   }
 
   if (params.perPage) {
-    query.append("per_page", params.perPage.toString());
+    query.append("perPage", params.perPage.toString());
   }
 
   if (params.search) {
     query.append("search", params.search);
   }
 
-  if (params.isActive) {
-    query.append("is_active", params.isActive.toString());
+  if (params.direction) {
+    query.append("direction", params.direction.toString());
+  }
+
+  if (params.sort) {
+    query.append("sort", params.sort.toString());
   }
 
   return query.toString();
@@ -63,15 +67,8 @@ function updateGenreMutation(genre: GenrePayload) {
   return { url: `${endpointUrl}/${genre.id}`, method: "PUT", body: genre };
 }
 
-// function getCategories() {
-//   return "categories";
-// }
-
 export const genreSlice = apiSlice.injectEndpoints({
   endpoints: ({ query, mutation }) => ({
-    // getCategories: query<Categories, void>({
-    //   query: getCategories,
-    // }),
     getGenre: query<Genre, { id: string }>({
       query: getGenre,
       providesTags: ["Genres"],
@@ -100,7 +97,6 @@ export const {
   useGetGenresQuery,
   useDeleteGenreMutation,
   useGetGenreQuery,
-  //useGetCategoriesQuery,
   useUpdateGenreMutation,
   useCreateGenreMutation,
 } = genreSlice;

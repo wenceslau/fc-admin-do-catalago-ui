@@ -13,6 +13,8 @@ import {CastMemberList} from "./features/cast-members/CastMemberList";
 import {CastMemberEdit} from "./features/cast-members/CastMemberEdit";
 import {GenreCreate} from "./features/genre/GenreCreate";
 import {CastMemberCreate} from "./features/cast-members/CastMemberCreate";
+import {GenreEdit} from "./features/genre/GenreEdit";
+import {GenreList} from "./features/genre/GenreList";
 
 
 function App() {
@@ -43,9 +45,9 @@ function App() {
               <Route path={"/cast-members/edit/:id"} element={<CastMemberEdit/>}/>
 
               {/* Genre */}
-              {/*<Route path="/genres" element={<GenreList/>}/>*/}
+              <Route path="/genres" element={<GenreList/>}/>
               <Route path="/genres/create" element={<GenreCreate/>}/>
-              {/*<Route path="/genres/edit/:id" element={<GenreEdit/>}/>*/}
+              <Route path="/genres/edit/:id" element={<GenreEdit/>}/>
 
               <Route path="*" element={<Typography variant="h3" component="h1">Page Not Found</Typography>}/>
             </Routes>
