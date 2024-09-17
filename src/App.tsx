@@ -15,6 +15,9 @@ import {GenreCreate} from "./features/genre/GenreCreate";
 import {CastMemberCreate} from "./features/cast-members/CastMemberCreate";
 import {GenreEdit} from "./features/genre/GenreEdit";
 import {GenreList} from "./features/genre/GenreList";
+import {VideosList} from "./features/videos/VideosList";
+import {VideosCreate} from "./features/videos/VideosCreate";
+import {VideosEdit} from "./features/videos/VideosEdit";
 
 
 function App() {
@@ -48,6 +51,11 @@ function App() {
               <Route path="/genres" element={<GenreList/>}/>
               <Route path="/genres/create" element={<GenreCreate/>}/>
               <Route path="/genres/edit/:id" element={<GenreEdit/>}/>
+
+              {/* Videos */}
+              <Route path="/videos" element={<VideosList/>}/>
+              <Route path="/videos/create" element={<VideosCreate/>}/>
+              <Route path="/videos/edit/:id" element={<VideosEdit/>}/>
 
               <Route path="*" element={<Typography variant="h3" component="h1">Page Not Found</Typography>}/>
             </Routes>

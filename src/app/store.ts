@@ -9,12 +9,13 @@ import {
 } from "@reduxjs/toolkit";
 import {castMembersApiSlice} from "../features/cast-members/castMembersSlice";
 import {genreSlice} from "../features/genre/genreSlice";
+import {videosSlice} from "../features/videos/VideoSlice";
 
 const rootReducer = combineReducers({
   [apiSlice.reducerPath]: apiSlice.reducer,
   [categoriesApiSlice.reducerPath]: apiSlice.reducer,
   [castMembersApiSlice.reducerPath]: apiSlice.reducer,
-  // [videosSlice.reducerPath]: apiSlice.reducer,
+  [videosSlice.reducerPath]: apiSlice.reducer,
   [genreSlice.reducerPath]: apiSlice.reducer,
   // auth: authSlice.reducer,
   // uploadSlice: uploadReducer,
