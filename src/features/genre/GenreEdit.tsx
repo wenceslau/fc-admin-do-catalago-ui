@@ -1,17 +1,17 @@
-import { Paper, Typography } from "@mui/material";
-import { Box } from "@mui/system";
-import { useSnackbar } from "notistack";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Genre } from "../../types/Genres";
+import {useSnackbar} from "notistack";
+import React, {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
+import {mapGenreFromForm, mapGenreToForm} from "./util";
+import {GenreForm} from "./components/GenreForm";
+import {Genre} from "../../types/Genres";
+import {Paper, Typography} from "@mui/material";
+import {Box} from "@mui/system";
+import {useGetCategoriesQuery} from "../categories/categorySlice";
 import {
   initialState as genreInitialState,
   useGetGenreQuery,
   useUpdateGenreMutation,
 } from "./genreSlice";
-import {mapGenreFromForm, mapGenreToForm} from "./util";
-import {GenreForm} from "./components/GenreForm";
-import {useGetCategoriesQuery} from "../categories/categorySlice";
 
 export const GenreEdit = () => {
   const [options] = useState({
@@ -19,17 +19,17 @@ export const GenreEdit = () => {
     search: "",
     perPage: 1000
   });
-  const { data: categories } = useGetCategoriesQuery(options);
+  const {data: categories} = useGetCategoriesQuery(options);
 
   const id = useParams<{ id: string }>().id as string;
-  const { data: genre, isFetching } = useGetGenreQuery({ id });
-  const { enqueueSnackbar } = useSnackbar();
+  const {data: genre, isFetching} = useGetGenreQuery({id});
+  const {enqueueSnackbar} = useSnackbar();
   const [updateGenre, status] = useUpdateGenreMutation();
   const [genreState, setGenreState] = useState<Genre>(genreInitialState);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const { name, value } = event.target;
-    setGenreState((state) => ({ ...state, [name]: value }));
+    const {name, value} = event.target;
+    setGenreState((state) => ({...state, [name]: value}));
   }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -45,11 +45,11 @@ export const GenreEdit = () => {
 
   useEffect(() => {
     if (status.isSuccess) {
-      enqueueSnackbar("Genre updated", { variant: "success" });
+      enqueueSnackbar("Genre updated", {variant: "success"});
     }
 
     if (status.isError) {
-      enqueueSnackbar("Error updating genre", { variant: "error" });
+      enqueueSnackbar("Error updating genre", {variant: "error"});
     }
   }, [status, enqueueSnackbar]);
 
