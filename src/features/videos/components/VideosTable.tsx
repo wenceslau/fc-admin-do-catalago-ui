@@ -73,7 +73,7 @@ export function VideosTable({
     const { items: videos } = data;
     return videos.map((video) => ({
       id: video.id,
-      title: video.name,
+      title: video.title,
       genres: video.genres,
       categories: video.categories,
     }));

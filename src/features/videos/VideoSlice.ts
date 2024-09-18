@@ -13,7 +13,7 @@ const endpointUrl = "/videos";
 
 export const initialState: Video = {
   id: "",
-  name: "",
+  title: "",
   rating: "",
   genres: [],
   duration: "0",

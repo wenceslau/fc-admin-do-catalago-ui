@@ -41,6 +41,9 @@ export function VideosForm({
   handleAddFile,
   handleRemoveFile,
 }: Props) {
+
+  console.log("VideosForm", categories);
+
   const handleAddThumbnail = (file: File) => {
     handleAddFile({ name: "thumb_file", file });
   };
@@ -80,9 +83,9 @@ export function VideosForm({
           <Grid item xs={12} md={6} sx={{ "& .MuiTextField-root": { my: 2 } }}>
             <FormControl fullWidth>
               <TextField
-                name="name"
-                label="name"
-                value={video.name}
+                name="title"
+                label="title"
+                value={video.title}
                 disabled={isDisabled}
                 onChange={handleChange}
                 inputProps={{ "data-testid": "title" }}

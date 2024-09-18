@@ -14,6 +14,7 @@ export const useUniqueCategories: UseUniqueCategoriesHook = (
   videoState,
   setVideoState
 ) => {
+  console.log("useUniqueCategories", videoState);
   const [uniqueCategories, setUniqueCategories] = useState<Category[]>([]);
   const categoriesToKeepRef = useRef<Category[] | undefined>(undefined);
   const { genres, categories } = videoState;

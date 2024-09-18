@@ -27,13 +27,14 @@ export const VideosCreate = () => {
   const { data: castMembers } = useGetAllCastMembersQuery();
   const [createVideo, status] = useCreateVideoMutation();
   const [videoState, setVideoState] = useState<Video>(initialState);
-  //const [caregories] = useUniqueCategories(videoState, setVideoState);
-  const { data: caregories } = useGetCategoriesQuery(options);
+  const [caregories] = useUniqueCategories(videoState, setVideoState);
+  //const { data: caregories } = useGetCategoriesQuery(options);
   const [selectedFiles, setSelectedFiles] = useState<FileObject[]>([]);
   const dispatch = useAppDispatch();
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
+    console.log("handleChange:::", name, value);
     setVideoState((state) => ({ ...state, [name]: value }));
   }
 
@@ -84,7 +85,7 @@ export const VideosCreate = () => {
 
         <VideosForm
           video={videoState}
-          categories={caregories?.items}
+          categories={caregories}
           genres={genres?.items}
           isLoading={status.isLoading}
           isDisabled={status.isLoading}

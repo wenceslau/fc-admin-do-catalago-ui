@@ -26,12 +26,13 @@ export const AutoCompleteFields = ({
   isDisabled,
   handleChange,
 }: Props) => {
+  console.log("AutoCompleteFields", name, values, options, isLoading, isDisabled);
   const renderOptions = (
     props: React.HTMLAttributes<HTMLLIElement>,
     option: Category | Genre | CastMember
   ) => (
-    <li {...props} key={option.id}>
-      {option.name}
+    <li {...props} key={option?.id}>
+      {option?.name}
     </li>
   );
 
@@ -39,13 +40,14 @@ export const AutoCompleteFields = ({
     option: Genre | Category | CastMember,
     value: Genre | Category | CastMember
   ) => {
-    return option.id === value.id;
+    return option?.id === value?.id;
   };
 
   const handleOnChange = (
     _e: React.ChangeEvent<{}>,
     newValue: (Genre | Category | CastMember)[]
   ) => {
+    console.log("handleOnChange", newValue);
     handleChange({ target: { name, value: newValue } } as any);
   };
 
@@ -65,7 +67,7 @@ export const AutoCompleteFields = ({
       renderOption={renderOptions}
       isOptionEqualToValue={isEqualId}
       disabled={isDisabled || !options}
-      getOptionLabel={(option) => option.name}
+      getOptionLabel={(option) => option?.name}
     />
   );
 };

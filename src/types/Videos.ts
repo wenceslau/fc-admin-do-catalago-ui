@@ -16,7 +16,7 @@ export interface Videos {
 
 export interface Video {
   id: string;
-  name: string;
+  title: string;
   description: string;
   year_launched: string;
   opened: boolean;
@@ -44,13 +44,14 @@ export interface VideoParams {
 
 export interface VideoPayload {
   id?: string;
-  name: string;
+  title: string;
   rating: string;
   opened: boolean;
+  published: false;
   duration: string;
   description: string;
-  genres_id?: string[];
+  genres?: string[];
   year_launched: string;
-  categories_id?: string[];
-  cast_members_id?: string[];
+  categories?: string[];
+  cast_members?: string[];
 }

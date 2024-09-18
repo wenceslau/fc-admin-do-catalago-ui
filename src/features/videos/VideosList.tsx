@@ -9,9 +9,9 @@ import { useDeleteVideoMutation, useGetVideosQuery } from "./VideoSlice";
 export const VideosList = () => {
   const { enqueueSnackbar } = useSnackbar();
   const [options, setOptions] = useState({
-    page: 1,
+    page: 0,
     search: "",
-    perPage: 10,
+    per_page: 10,
     rowsPerPage: [10, 20, 30],
   });
 
@@ -27,8 +27,8 @@ export const VideosList = () => {
     setOptions({ ...options, page: page + 1 });
   }
 
-  function handleOnPageSizeChange(perPage: number) {
-    setOptions({ ...options, perPage });
+  function handleOnPageSizeChange(per_page: number) {
+    setOptions({ ...options, per_page });
   }
 
   function handleFilterChange(filterModel: GridFilterModel) {
@@ -68,7 +68,7 @@ export const VideosList = () => {
       <VideosTable
         data={data}
         isFetching={isFetching}
-        perPage={options.perPage}
+        perPage={options.per_page}
         rowsPerPage={options.rowsPerPage}
         handleDelete={handleDeleteVideo}
         handleOnPageChange={handleOnPageChange}
