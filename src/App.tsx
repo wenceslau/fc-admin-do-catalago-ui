@@ -1,9 +1,9 @@
 import * as React from "react";
 import {ThemeProvider} from "@mui/system";
-import {Box, Typography} from "@mui/material";
+import {Box, CssBaseline, Typography} from "@mui/material";
 import Header from "./components/Header";
 import {Layout} from "./components/Layout";
-import {appTheme} from "./config/tehme";
+import {darkTheme, lightTheme} from "./config/tehme";
 import {Route, Routes} from "react-router-dom";
 import {CategoryList} from "./features/categories/CategoryList";
 import {CategoryEdit} from "./features/categories/CategoryEdit";
@@ -22,19 +22,19 @@ import {VideosEdit} from "./features/videos/VideosEdit";
 
 function App() {
   return (
-    <ThemeProvider theme={appTheme}>
-
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline/>
       <SnackbarProvider maxSnack={3} anchorOrigin={{
         vertical: "top",
         horizontal: "right"
       }}>
-        <Box
-          component="main"
-          sx={{
-            height: "100vh",
-            backgroundColor: (theme) => theme.palette.grey[900]
-          }}
-        >
+        {/*<Box*/}
+        {/*  component="main"*/}
+        {/*  sx={{*/}
+        {/*    height: "100vh",*/}
+        {/*    backgroundColor: (theme) => theme.palette.background.default,*/}
+        {/*  }}*/}
+        {/*>*/}
           <Header/>
           <Layout>
             <Routes>
@@ -61,7 +61,7 @@ function App() {
             </Routes>
 
           </Layout>
-        </Box>
+        {/*</Box>*/}
       </SnackbarProvider>
 
     </ThemeProvider>
