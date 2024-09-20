@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/fc-admin-do-catalogo-ui.iml" filepath="$PROJECT_DIR$/.idea/fc-admin-do-catalogo-ui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/sysm-admin-do-catalogo-ui.iml" filepath="$PROJECT_DIR$/.idea/sysm-admin-do-catalogo-ui.iml" />
     </modules>
   </component>
 </project>
