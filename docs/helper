@@ -1,3 +1,15 @@
+To create docker container to run the project in an development environment
+  docker run --rm -it --mount type=bind,source=$(pwd)/,target=/usr/src/app -p 3000:3000 node:20.15.1 bash
+    After running the command above, run the following commands inside the container
+      cd /usr/src/app
+      npm install
+      npm start
+
+Using container you don't need to install nodejs in your machine, just docker
+
+____________________________________________________________________________________________________________________
+
+
 ⇒  npx create-next-app@latest
 
 ⇒  npx create-next-app
@@ -39,6 +51,11 @@ React testing library
 ⇒ npm i msw@0.49.3 --save-dev
     command to install msw
 
+=> npm i keycloak-js
+    command to install keycloak-js
+
+=> npm i axios
+    command to install axios
 
 
 

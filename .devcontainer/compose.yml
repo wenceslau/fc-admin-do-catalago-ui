@@ -1,0 +1,10 @@
+#docker run --rm -it --mount type=bind,source=$(pwd)/,target=/usr/src/app -p 3000:3000 node:20.15.1 bash
+services:
+  app:
+    build:
+        context: ..
+        dockerfile: .devcontainer/Dockerfile.dev
+    ports:
+      - 3000:3000
+    volumes:
+      - ../:/usr/src/app
