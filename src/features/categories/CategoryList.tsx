@@ -10,7 +10,7 @@ export const CategoryList = () => {
   const [options, setOptions] = useState({
     page: 0,
     search: "",
-    perPage: 2,
+    perPage: 10,
     rowsPerPage: [2, 5, 10, 20],
   });
   const {data, isFetching, error} = useGetCategoriesQuery(options);
