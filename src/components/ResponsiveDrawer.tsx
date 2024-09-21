@@ -20,7 +20,7 @@ type Props = {
 
 export default function ResponsiveDrawer({ open, onClose }: Props) {
   const routes = [
-    { path: "/", name: "Categories" },
+    { path: "/categories", name: "Categories" },
     { path: "/cast-members", name: "Cast Members" },
     { path: "/genres", name: "Genres" },
     { path: "/videos", name: "Videos" },

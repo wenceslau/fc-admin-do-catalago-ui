@@ -51,6 +51,11 @@ React testing library
 ⇒ npm i msw@0.49.3 --save-dev
     command to install msw
 
+=> npm i keycloak-js
+    command to install keycloak-js
+
+=> npm i axios
+    command to install axios
 
 
 

@@ -15,45 +15,133 @@ import {CastMemberEdit} from "./features/cast-members/CastMemberEdit";
 import {CastMemberCreate} from "./features/cast-members/CastMemberCreate";
 import {CastMemberList} from "./features/cast-members/CastMemberList";
 import {UploadList} from "./features/uploads/UploadList";
+import {ProtectedRoute} from "./components/ProtectedRoute";
+import Login from "./components/Login";
 
 
 function App() {
   return (
     <div data-testid="app">
       <Layout>
-        <UploadList />
+        <UploadList/>
         <Routes>
-          <Route path="/" element={<CategoryList/>}/>
+          <Route path="/" element={<Login/>}/>
 
           {/* Login */}
+          <Route path="/login" element={<Login/>}/>
 
           {/* Category */}
-          <Route path="/categories" element={<CategoryList/>}/>
-          <Route path="/categories/create" element={<CategoryCreate/>}/>
-          <Route path="/categories/edit/:id" element={<CategoryEdit/>}/>
+          <Route
+            path="/categories"
+            element={
+              <ProtectedRoute>
+                <CategoryList/>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/categories/create"
+            element={
+              <ProtectedRoute>
+                <CategoryCreate/>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/categories/edit/:id"
+            element={
+              <ProtectedRoute>
+                <CategoryEdit/>
+              </ProtectedRoute>
+            }
+          />
 
           {/* Cast members */}
-          <Route path="/cast-members" element={<CastMemberList/>}/>
-          <Route path="/cast-members/create" element={<CastMemberCreate/>}/>
-          <Route path="/cast-members/edit/:id" element={<CastMemberEdit/>}/>
+          <Route
+            path="/cast-members"
+            element={
+              <ProtectedRoute>
+                <CastMemberList/>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/cast-members/create"
+            element={
+              <ProtectedRoute>
+                <CastMemberCreate/>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/cast-members/edit/:id"
+            element={
+              <ProtectedRoute>
+                <CastMemberEdit/>
+              </ProtectedRoute>
+            }
+          />
 
           {/* Genre */}
-          <Route path="/genres" element={<GenreList/>}/>
           <Route
-            path="/genres/create" element={<GenreCreate/>}/>
-          <Route path="/genres/edit/:id" element={<GenreEdit/>}/>
+            path="/genres"
+            element={
+              <ProtectedRoute>
+                <GenreList/>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/genres/create"
+            element={
+              <ProtectedRoute>
+                <GenreCreate/>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/genres/edit/:id"
+            element={
+              <ProtectedRoute>
+                <GenreEdit/>
+              </ProtectedRoute>
+            }
+          />
 
           {/* Videos */}
-          <Route path="/videos" element={<VideosList/>}/>
-          <Route path="/videos/create" element={<VideosCreate/>}/>
-          <Route path="/videos/edit/:id" element={<VideosEdit/>}/>
+          <Route
+            path="/videos"
+            element={
+              <ProtectedRoute>
+                <VideosList/>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/videos/create"
+            element={
+              <ProtectedRoute>
+                <VideosCreate/>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/videos/edit/:id"
+            element={
+              <ProtectedRoute>
+                <VideosEdit/>
+              </ProtectedRoute>
+            }
+          />
 
-          <Route path="*" element={
-            <Box sx={{color: "white"}}>
-              <Typography variant="h1">404</Typography>
-              <Typography variant="h2">Page not found</Typography>
-            </Box>
-          }
+          <Route
+            path="*"
+            element={
+              <Box sx={{color: "white"}}>
+                <Typography variant="h1">404</Typography>
+                <Typography variant="h2">Page not found</Typography>
+              </Box>
+            }
           />
         </Routes>
       </Layout>

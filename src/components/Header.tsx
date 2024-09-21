@@ -2,6 +2,7 @@ import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Box, Button, IconButton, Toolbar } from "@mui/material";
+import {keycloak} from "../keycloakConfig";
 
 type HeaderProps = {
   toggle: () => void;
@@ -29,7 +30,7 @@ export function Header({ toggle, theme, handleDrawerToggle }: HeaderProps) {
         </IconButton>
 
         <Button color="inherit"
-                // onClick={() => keycloak.logout()}
+                onClick={() => keycloak.logout()}
         >
           Login
         </Button>
