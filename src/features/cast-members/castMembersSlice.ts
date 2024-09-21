@@ -1,5 +1,5 @@
 import {
-  Results,
+  CastMembers,
   CastMemberParams,
   CastMember, CastMemberID,
 } from "../../types/CastMembers";
@@ -76,7 +76,7 @@ function createCastMember(castMember: CastMember) {
 
 export const castMembersApiSlice = apiSlice.injectEndpoints({
   endpoints: ({ query, mutation }) => ({
-    getCastMembers: query<Results, CastMemberParams>({
+    getCastMembers: query<CastMembers, CastMemberParams>({
       query: getCastMembers,
       providesTags: ["CastMembers"], //providesTags: ["CastMembers"] will store the data in the cache
     }),
