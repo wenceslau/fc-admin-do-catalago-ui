@@ -42,38 +42,36 @@ export function VideosForm({
   handleRemoveFile,
 }: Props) {
 
-  console.log("VideosForm", categories);
-
   const handleAddThumbnail = (file: File) => {
-    handleAddFile({ name: "thumb_file", file });
+    handleAddFile({ name: "THUMBNAIL", file });
   };
 
   const handleRemoveThumbnail = () => {
-    handleRemoveFile("thumb_file");
+    handleRemoveFile("THUMBNAIL");
   };
 
   const handleAddBanner = (file: File) => {
-    handleAddFile({ name: "banner_file", file });
+    handleAddFile({ name: "BANNER", file });
   };
 
   const handleAddTrailer = (file: File) => {
-    handleAddFile({ name: "trailer_file", file });
+    handleAddFile({ name: "TRAILER", file });
   };
 
   const handleAddVideo = (file: File) => {
-    handleAddFile({ name: "video_file", file });
+    handleAddFile({ name: "VIDEO", file });
   };
 
   const handleRemoveBanner = () => {
-    handleRemoveFile("banner_file");
+    handleRemoveFile("BANNER");
   };
 
   const handleRemoveTrailer = () => {
-    handleRemoveFile("trailer_file");
+    handleRemoveFile("TRAILER");
   };
 
   const handleRemoveVideo = () => {
-    handleRemoveFile("video_file");
+    handleRemoveFile("VIDEO");
   };
 
   return (

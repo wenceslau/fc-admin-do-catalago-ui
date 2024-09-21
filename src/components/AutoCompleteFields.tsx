@@ -26,7 +26,6 @@ export const AutoCompleteFields = ({
   isDisabled,
   handleChange,
 }: Props) => {
-  console.log("AutoCompleteFields", name, values, options, isLoading, isDisabled);
   const renderOptions = (
     props: React.HTMLAttributes<HTMLLIElement>,
     option: Category | Genre | CastMember
@@ -47,7 +46,6 @@ export const AutoCompleteFields = ({
     _e: React.ChangeEvent<{}>,
     newValue: (Genre | Category | CastMember)[]
   ) => {
-    console.log("handleOnChange", newValue);
     handleChange({ target: { name, value: newValue } } as any);
   };
 

@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { useAppDispatch } from "../../app/hooks";
 import { useUniqueCategories } from "../../hooks/useUniqueCategories";
 import { FileObject, Video } from "../../types/Videos";
-//import { addUpload } from "../uploads/UploadSlice";
 import { VideosForm } from "./components/VideosForm";
 import { mapVideoToForm } from "./util";
 import {
@@ -15,6 +14,7 @@ import {
   useGetAllGenresQuery,
 } from "./VideoSlice";
 import {useGetCategoriesQuery} from "../categories/categorySlice";
+import {addUpload} from "../uploads/UploadSlice";
 
 export const VideosCreate = () => {
   const [options] = useState({
@@ -49,7 +49,9 @@ export const VideosCreate = () => {
   function handleSubmitUploads(videoId: string) {
     selectedFiles.forEach(({ file, name }) => {
       const payload = { id: nanoid(), file, videoId, field: name };
-      //dispatch(addUpload(payload));
+      setTimeout(() => {
+        dispatch(addUpload(payload));
+      } , 100);
     });
   }
 

@@ -1,5 +1,3 @@
-import {categoriesApiSlice} from "../features/categories/categorySlice";
-import {apiSlice} from "../features/api/apiSlice";
 import {
   Action,
   combineReducers,
@@ -7,9 +5,14 @@ import {
   PreloadedState,
   ThunkAction,
 } from "@reduxjs/toolkit";
+import { apiSlice } from "../features/api/apiSlice";
 import {castMembersApiSlice} from "../features/cast-members/castMembersSlice";
-import {genreSlice} from "../features/genre/genreSlice";
-import {videosSlice} from "../features/videos/VideoSlice";
+import { categoriesApiSlice } from "../features/categories/categorySlice";
+import { genreSlice } from "../features/genre/genreSlice";
+import { videosSlice } from "../features/videos/VideoSlice";
+import { uploadReducer } from "../features/uploads/UploadSlice";
+// import { authSlice } from "../features/auth/authSlice";
+import { uploadQueue } from "../middleware/uploadQueue";
 
 const rootReducer = combineReducers({
   [apiSlice.reducerPath]: apiSlice.reducer,
@@ -18,7 +21,7 @@ const rootReducer = combineReducers({
   [videosSlice.reducerPath]: apiSlice.reducer,
   [genreSlice.reducerPath]: apiSlice.reducer,
   // auth: authSlice.reducer,
-  // uploadSlice: uploadReducer,
+  uploadSlice: uploadReducer,
 });
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
@@ -32,24 +35,10 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
           ignoredPaths: ["uploadSlice.file"],
         },
       })
-        //.prepend(uploadQueue.middleware)
+        .prepend(uploadQueue.middleware)
         .concat(apiSlice.middleware),
   });
 };
-
-
-// export const store = configureStore({
-//   reducer:
-//     {
-//       counter: counterReducer,
-//       [apiSlice.reducerPath]: apiSlice.reducer,
-//       [categoriesApiSlice.reducerPath]: apiSlice.reducer,
-//     },
-//
-//     middleware: (getDefaultMiddleware) => {
-//     return getDefaultMiddleware().concat(apiSlice.middleware);
-//   }
-// });
 
 export type AppStore = ReturnType<typeof setupStore>;
 export type AppDispatch = AppStore["dispatch"];
@@ -60,12 +49,3 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action<string>
 >;
-
-// export type AppDispatch = typeof store.dispatch;
-// export type RootState = ReturnType<typeof store.getState>;
-// export type AppThunk<ReturnType = void> = ThunkAction<
-//   ReturnType,
-//   RootState,
-//   unknown,
-//   Action<string>
-// >;

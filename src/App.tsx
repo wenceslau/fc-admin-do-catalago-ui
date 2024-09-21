@@ -14,12 +14,14 @@ import {VideosEdit} from "./features/videos/VideosEdit";
 import {CastMemberEdit} from "./features/cast-members/CastMemberEdit";
 import {CastMemberCreate} from "./features/cast-members/CastMemberCreate";
 import {CastMemberList} from "./features/cast-members/CastMemberList";
+import {UploadList} from "./features/uploads/UploadList";
 
 
 function App() {
   return (
     <div data-testid="app">
       <Layout>
+        <UploadList />
         <Routes>
           <Route path="/" element={<CategoryList/>}/>
 
