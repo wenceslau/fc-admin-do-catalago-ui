@@ -32,6 +32,7 @@ export const KeycloakProvider = ({
 
     const initKeycloak = async () => {
       try {
+        console.log("Keycloak initializing...");
         const authenticated = await keycloak.init({onLoad: "login-required"});
         if (authenticated) {
           dispatch(setAuthenticated(true));

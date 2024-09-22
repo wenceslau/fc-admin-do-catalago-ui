@@ -1,7 +1,7 @@
 To create docker container to run the project in an development environment
-  docker run --rm -it --mount type=bind,source=$(pwd)/,target=/usr/src/app -p 3000:3000 node:20.15.1 bash
+  docker run --rm -it --mount type=bind,source=$(pwd)/,target=/app -p 3000:3000 node:20.15.1 bash
     After running the command above, run the following commands inside the container
-      cd /usr/src/app
+      cd /app
       npm install
       npm start
 

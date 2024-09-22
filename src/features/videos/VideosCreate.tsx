@@ -13,22 +13,15 @@ import {
   useGetAllCastMembersQuery,
   useGetAllGenresQuery,
 } from "./VideoSlice";
-import {useGetCategoriesQuery} from "../categories/categorySlice";
 import {addUpload} from "../uploads/UploadSlice";
 
 export const VideosCreate = () => {
-  const [options] = useState({
-    page: 0,
-    search: "",
-    perPage: 1000
-  });
   const { enqueueSnackbar } = useSnackbar();
   const { data: genres } = useGetAllGenresQuery();
   const { data: castMembers } = useGetAllCastMembersQuery();
   const [createVideo, status] = useCreateVideoMutation();
   const [videoState, setVideoState] = useState<Video>(initialState);
-  const [caregories] = useUniqueCategories(videoState, setVideoState);
-  //const { data: caregories } = useGetCategoriesQuery(options);
+  const [categories] = useUniqueCategories(videoState, setVideoState);
   const [selectedFiles, setSelectedFiles] = useState<FileObject[]>([]);
   const dispatch = useAppDispatch();
 
@@ -87,7 +80,7 @@ export const VideosCreate = () => {
 
         <VideosForm
           video={videoState}
-          categories={caregories}
+          categories={categories}
           genres={genres?.items}
           isLoading={status.isLoading}
           isDisabled={status.isLoading}

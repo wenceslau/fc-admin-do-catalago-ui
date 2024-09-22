@@ -16,7 +16,7 @@ import {CastMemberCreate} from "./features/cast-members/CastMemberCreate";
 import {CastMemberList} from "./features/cast-members/CastMemberList";
 import {UploadList} from "./features/uploads/UploadList";
 import {ProtectedRoute} from "./components/ProtectedRoute";
-import Login from "./components/Login";
+import Home from "./components/Home";
 
 
 function App() {
@@ -25,10 +25,17 @@ function App() {
       <Layout>
         <UploadList/>
         <Routes>
-          <Route path="/" element={<Login/>}/>
 
           {/* Login */}
-          <Route path="/login" element={<Login/>}/>
+          <Route path="/home" element={
+            <Home/>
+          }/>
+
+          <Route path="/" element={
+            <ProtectedRoute>
+              <CategoryList/>
+            </ProtectedRoute>
+          }/>
 
           {/* Category */}
           <Route

@@ -17,16 +17,6 @@ const container = document.getElementById("root")!;
 const root = createRoot(container);
 const store = setupStore();
 
-// root.render(
-//   // <React.StrictMode>
-//     <BrowserRouter>
-//       <Provider store={store}>
-//         <App/>
-//       </Provider>
-//     </BrowserRouter>
-//   // </React.StrictMode>
-// );
-
 root.render(
   <Provider store={store}>
     <KeycloakProvider>
@@ -37,6 +27,17 @@ root.render(
       </React.StrictMode>
     </KeycloakProvider>
   </Provider>
+
+// <Provider store={store}>
+//   <ReactKeycloakProvider authClient={keycloak}>
+//     <React.StrictMode>
+//       <BrowserRouter>
+//         <App/>
+//       </BrowserRouter>
+//     </React.StrictMode>
+//   </ReactKeycloakProvider>,
+// </Provider>
+
 );
 
 
