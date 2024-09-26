@@ -6,6 +6,14 @@ To create docker container to run the project in an development environment
 
 Using container you don't need to install nodejs in your machine, just docker
 
+OR
+
+use the file run.docker.sh to run the container with all the commands above
+
+first you should execute this command to give permission to the file
+
+> chmod +x run-docker.sh
+
 ____________________________________________________________________________________________________________________
 
 

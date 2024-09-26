@@ -7,4 +7,6 @@ docker run --rm -it \
   node:20.15.1 bash -c \
   "cd /app && \
   npm install && \
-  npm start"
+  /bin/bash"
+
+# npm start
