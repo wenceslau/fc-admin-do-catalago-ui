@@ -1,9 +1,9 @@
 import Keycloak from "keycloak-js";
 
 const keycloakConfig = {
-  url: "http://keycloak_prd:8080/",
-  realm: "sysm-codeflix",
-  clientId: "codeflix-api",
+  url: "http://srv_keycloak_prd:8080/",
+  realm: "sys-monkey",
+  clientId: "sysm-codeflix-api",
 };
 
 export const keycloak = new Keycloak(keycloakConfig);
